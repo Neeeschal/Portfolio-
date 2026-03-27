@@ -81,40 +81,40 @@ nav {
 /* ── SECTIONS WRAPPER ── */
 section { padding: 7rem 6vw; max-width: 1100px; margin: 0 auto; }
 
-/* ── HERO ── */
-#hero {
+/* ── Person ── */
+#Person {
   min-height: 100vh; display: flex; flex-direction: column;
   justify-content: center; position: relative; max-width: 100%;
   padding: 7rem 6vw 4rem;
 }
-.hero-eyebrow {
+.Person-eyebrow {
   font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--color-accent); margin-bottom: 1.2rem;
   display: flex; align-items: center; gap: 0.8rem;
 }
-.hero-eyebrow::before {
+.Person-eyebrow::before {
   content: ''; display: inline-block;
   width: 2.5rem; height: 1px; background: var(--color-accent);
 }
-.hero-name {
+.Person-name {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 900; line-height: 1.0;
   color: var(--color-text);
   letter-spacing: -0.02em;
 }
-.hero-name span { color: var(--color-accent); }
-.hero-role {
+.Person-name span { color: var(--color-accent); }
+.Person-role {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 400; font-style: italic;
   color: var(--color-muted); margin-top: 0.4rem;
 }
-.hero-desc {
+.Person-desc {
   max-width: 520px; margin-top: 2rem;
   font-size: 1rem; color: var(--color-muted); line-height: 1.8;
 }
-.hero-cta {
+.Person-cta {
   display: inline-flex; align-items: center; gap: 0.7rem;
   margin-top: 2.8rem; padding: 0.9rem 2.2rem;
   background: transparent; border: 1px solid var(--color-accent);
@@ -122,16 +122,16 @@ section { padding: 7rem 6vw; max-width: 1100px; margin: 0 auto; }
   font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
   transition: all 0.3s; font-family: var(--font-body);
 }
-.hero-cta:hover {
+.Person-cta:hover {
   background: var(--color-accent); color: var(--color-bg);
 }
-.hero-scroll {
+.Person-scroll {
   position: absolute; bottom: 3rem; left: 6vw;
   display: flex; align-items: center; gap: 0.8rem;
   color: var(--color-muted); font-size: 0.75rem; letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.hero-scroll::after {
+.Person-scroll::after {
   content: ''; display: inline-block;
   width: 1px; height: 50px; background: var(--color-muted);
   animation: scrollPulse 2s ease-in-out infinite;
@@ -291,7 +291,7 @@ footer {
 @media (max-width: 768px) {
   .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
   .nav-links { display: none; }
-  .hero-name { font-size: clamp(2.8rem, 12vw, 5rem); }
+  .Person-name { font-size: clamp(2.8rem, 12vw, 5rem); }
 }
 </style>
 </head>
@@ -301,8 +301,8 @@ footer {
      🧭 NAVIGATION BAR
      ============================================================ -->
 <nav>
-  <!-- ✏️ Change "YN" to your initials -->
-  <a href="#hero" class="nav-logo">NK</a>
+  <!-- ✏️ Change "NK" to your initials -->
+  <a href="#Person" class="nav-logo">NK</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -313,30 +313,30 @@ footer {
 
 
 <!-- ============================================================
-     🏠 HERO SECTION — The first thing visitors see
+     🏠 Person SECTION — The first thing visitors see
      ============================================================ -->
-<section id="hero">
-  <div class="hero-eyebrow">Welcome to my portfolio</div>
+<section id="Person">
+  <div class="Person-eyebrow">Welcome to my portfolio</div>
 
   <!-- ✏️ Change "Your" and "Name" below -->
-  <h1 class="hero-name">
+  <h1 class="Person-name">
     Nischal<br /><span>Koirala</span>
   </h1>
 
   <!-- ✏️ Change the role title below -->
-  <p class="hero-role">Aspiring Software Developer & Tech Enthusiast</p>
+  <p class="Person-role">Aspiring Software Developer & Tech Enthusiast</p>
 
   <!-- ✏️ Change this short description about yourself -->
-  <p class="hero-desc">
+  <p class="Person-desc">
     I'm a Computer Science student based in Hetauda, Nepal — passionate about
     building things with code and learning new technologies. I love turning ideas into reality through clean,
     thoughtful web experiences. This portfolio is a snapshot of my journey so far,
      showcasing my skills, projects, and the things I'm excited to learn next.
   </p>
 
-  <a href="#about" class="hero-cta">Learn about me →</a>
+  <a href="#about" class="Person-cta">Learn about me →</a>
 
-  <div class="hero-scroll">Scroll</div>
+  <div class="Person-scroll">Scroll</div>
 </section>
 
 
