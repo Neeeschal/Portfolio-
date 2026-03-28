@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+
+/* ============================================================
+   🎨 EASY CUSTOMIZATION — CHANGE THINGS HERE!
+   ============================================================ */
+
+:root {
+  --color-bg:       #0d0f14;       /* 🎨 Page background */
+  --color-surface:  #151820;       /* 🎨 Card background */
+  --color-accent:   #c8a96e;       /* 🎨 Gold highlight color */
+  --color-accent2:  #6e9fc8;       /* 🎨 Blue secondary color */
+  --color-text:     #e8e4dc;       /* 🎨 Main text color */
+  --color-muted:    #7a7a8a;       /* 🎨 Subtle text color */
+  --color-border:   #2a2d38;       /* 🎨 Line/border color */
+  --font-display:   'Playfair Display', serif;   /* 🔤 Heading font */
+  --font-body:      'DM Sans', sans-serif;       /* 🔤 Body font */
+}
+
+/* ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 6vw;
+  backdrop-filter: blur(20px);
+  background: rgba(13,15,20,0.75);
+  border-bottom: 1px solid var(--color-border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--color-accent); }
+
+/* ── SECTIONS WRAPPER ── */
+section { padding: 7rem 6vw; max-width: 1100px; margin: 0 auto; }
+
+/* ── Person ── */
+#Person {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; position: relative; max-width: 100%;
+  padding: 7rem 6vw 4rem;
+}
+.Person-eyebrow {
+  font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--color-accent); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.Person-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 2.5rem; height: 1px; background: var(--color-accent);
+}
+.Person-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 900; line-height: 1.0;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+.Person-name span { color: var(--color-accent); }
+.Person-role {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400; font-style: italic;
+  color: var(--color-muted); margin-top: 0.4rem;
+}
+.Person-desc {
+  max-width: 520px; margin-top: 2rem;
+  font-size: 1rem; color: var(--color-muted); line-height: 1.8;
+}
+.Person-cta {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  margin-top: 2.8rem; padding: 0.9rem 2.2rem;
+  background: transparent; border: 1px solid var(--color-accent);
+  color: var(--color-accent); text-decoration: none;
+  font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+  transition: all 0.3s; font-family: var(--font-body);
+}
+.Person-cta:hover {
+  background: var(--color-accent); color: var(--color-bg);
+}
+.Person-scroll {
+  position: absolute; bottom: 3rem; left: 6vw;
+  display: flex; align-items: center; gap: 0.8rem;
+  color: var(--color-muted); font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.Person-scroll::after {
+  content: ''; display: inline-block;
+  width: 1px; height: 50px; background: var(--color-muted);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* ── SECTION LABELS ── */
+.section-label {
+  font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--color-accent); margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before {
+  content: ''; display: inline-block;
+  width: 1.5rem; height: 1px; background: var(--color-accent);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; color: var(--color-text);
+  line-height: 1.15; margin-bottom: 3rem;
+}
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-photo-wrap {
+  position: relative; aspect-ratio: 3/4; max-height: 480px;
+}
+.about-photo-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent2) 100%);
+  opacity: 0.15; border-radius: 2px;
+}
+.about-photo-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.5rem;
+  border: 1px solid var(--color-border);
+  font-size: 4rem; color: var(--color-muted); letter-spacing: -0.02em;
+}
+.photo-hint {
+  font-family: var(--font-body); font-size: 0.75rem;
+  color: var(--color-muted); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-top: 0.5rem;
+}
+.about-text p { color: var(--color-muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
+.about-facts { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.fact { display: flex; gap: 1rem; align-items: baseline; }
+.fact-label {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-accent); min-width: 80px; font-weight: 500;
+}
+.fact-value { color: var(--color-text); font-size: 0.9rem; }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
+.skill-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 1.6rem 1.8rem;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s;
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { border-color: var(--color-accent); transform: translateY(-3px); }
+.skill-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+.skill-name { font-weight: 500; font-size: 0.95rem; color: var(--color-text); margin-bottom: 0.3rem; }
+.skill-level { font-size: 0.75rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.skill-bar { height: 2px; background: var(--color-border); margin-top: 1rem; border-radius: 2px; }
+.skill-fill { height: 100%; background: linear-gradient(90deg, var(--color-accent), var(--color-accent2)); border-radius: 2px; transition: width 1s ease; }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.project-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 2rem 2.2rem;
+  display: flex; flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.project-card:hover { border-color: var(--color-accent); transform: translateY(-5px); }
+.project-number {
+  font-family: var(--font-display); font-size: 3.5rem;
+  font-weight: 900; color: var(--color-border); line-height: 1;
+  margin-bottom: 1rem;
+}
+.project-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.6rem; }
+.project-desc { font-size: 0.88rem; color: var(--color-muted); flex: 1; line-height: 1.7; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+.tag {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border: 1px solid var(--color-border);
+  color: var(--color-muted);
+}
+.project-link {
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.4rem;
+  color: var(--color-accent); font-size: 0.78rem; text-decoration: none;
+  letter-spacing: 0.1em; text-transform: uppercase; transition: gap 0.25s;
+}
+.project-link:hover { gap: 0.8rem; }
+
+/* ── CONTACT ── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-info p { color: var(--color-muted); font-size: 0.97rem; line-height: 1.9; margin-bottom: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  text-decoration: none; color: var(--color-text);
+  padding: 1rem 1.2rem; border: 1px solid var(--color-border);
+  transition: border-color 0.25s, color 0.25s;
+}
+.contact-link:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.contact-link-icon { font-size: 1.1rem; }
+.contact-link-label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); }
+.contact-link-val { font-size: 0.9rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form input,
+.contact-form textarea {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 1rem 1.2rem;
+  font-family: var(--font-body); font-size: 0.9rem;
+  outline: none; transition: border-color 0.25s; resize: none;
+}
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--color-accent); }
+.contact-form textarea { min-height: 140px; }
+.contact-form button {
+  padding: 1rem 2rem;
+  background: var(--color-accent); color: var(--color-bg);
+  border: none; font-family: var(--font-body);
+  font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: opacity 0.25s; align-self: flex-start;
+}
+.contact-form button:hover { opacity: 0.8; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--color-border);
+  padding: 2rem 6vw; text-align: center;
+  color: var(--color-muted); font-size: 0.78rem; letter-spacing: 0.08em;
+}
+
+/* ── FADE-IN ANIMATIONS ── */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .nav-links { display: none; }
+  .Person-name { font-size: clamp(2.8rem, 12vw, 5rem); }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     🧭 NAVIGATION BAR
+     ============================================================ -->
+<nav>
+  <!-- ✏️ Change "NK" to your initials -->
+  <a href="#Person" class="nav-logo">NK</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+
+<!-- ============================================================
+     🏠 Person SECTION — The first thing visitors see
+     ============================================================ -->
+<section id="Person">
+  <div class="Person-eyebrow">Welcome to my portfolio</div>
+
+  <!-- ✏️ Change "Your" and "Name" below -->
+  <h1 class="Person-name">
+    Nischal<br /><span>Koirala</span>
+  </h1>
+
+  <!-- ✏️ Change the role title below -->
+  <p class="Person-role">Aspiring Software Developer & Tech Enthusiast</p>
+
+  <!-- ✏️ Change this short description about yourself -->
+  <p class="Person-desc">
+    I'm a Computer Science student based in Hetauda, Nepal — passionate about
+    building things with code and learning new technologies. I love turning ideas into reality through clean,
+    thoughtful web experiences. This portfolio is a snapshot of my journey so far,
+     showcasing my skills, projects, and the things I'm excited to learn next.
+  </p>
+
+  <a href="#about" class="Person-cta">Learn about me →</a>
+
+  <div class="Person-scroll">Scroll</div>
+</section>
+
+
+<!-- ============================================================
+     👤 ABOUT SECTION
+     ============================================================ -->
+<section id="about">
+  <div class="fade-in">
+    <div class="section-label">Who I am</div>
+    <h2 class="section-title">About Me</h2>
+  </div>
+
+  <div class="about-grid fade-in">
+
+    <!-- Photo placeholder — replace with <img src="your-photo.jpg"> if you have a photo -->
+    <div class="about-photo-wrap">
+      <div class="about-photo-bg"></div>
+      <div class="about-photo-inner">
+        
+        <img src="https://i.imgur.com/3YO0zwY.jpeg" alt="Nischal" style="width:100%;height:100%;object-fit:cover;">
+        <!-- ✏️ To add your photo, replace this block with:
+             <img src="photo.jpg" alt="Nischal" style="width:100%;height:100%;object-fit:cover;"> -->
+      </div>
+    </div>
+
+    <div class="about-text">
+      <!-- ✏️ Edit the paragraphs below to describe yourself -->
+      <p>
+        Hi! I'm a passionate learner currently pursuing my Bachelor of Computer Applications.
+        I enjoy problem-solving and creating things that live on the internet — from
+        simple web pages to interactive applications.
+      </p>
+      <p>
+        I'm always exploring new technologies and improving my skills. I believe in
+        writing clean code and designing user-friendly experiences.
+      </p>
+      <p>
+        When I'm not coding, you'll find me reading tech blogs, watching tutorials,
+        or experimenting with new project ideas.
+      </p>
+
+      <!-- ✏️ Edit the quick facts below -->
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-label">📍 Location</span>
+          <span class="fact-value">Hetauda, Nepal</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">🎓 Degree</span>
+          <span class="fact-value">BCA (Bachelor of Computer Applications)</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">🌐 Status</span>
+          <span class="fact-value">Open to Internships</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">💬 Languages</span>
+          <span class="fact-value">Nepali · English · Hindi</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     💻 SKILLS SECTION
+     ============================================================ -->
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-label">What I know</div>
+    <h2 class="section-title">Skills</h2>
+  </div>
+
+  <div class="skills-grid fade-in">
+
+    <!-- ✏️ Each block below is one skill card.
+         Change the icon, name, level text, and bar width (0% to 100%) -->
+
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">HTML5</div>
+      <div class="skill-level">Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">CSS3</div>
+      <div class="skill-level">Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🐘</div>
+      <div class="skill-name">PHP</div>
+      <div class="skill-level">Beginner</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-level">Beginner – Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">☕</div>
+      <div class="skill-name">Java</div>
+      <div class="skill-level">Beginner</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:35%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🛠️</div>
+      <div class="skill-name">Git & GitHub</div>
+      <div class="skill-level">Basic</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+    </div>
+
+    <!-- ✏️ To add more skills, copy one skill-card block and paste it here -->
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     🗂️ PROJECTS SECTION
+     ============================================================ -->
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-label">What I've built</div>
+    <h2 class="section-title">Projects</h2>
+  </div>
+
+  <div class="projects-grid fade-in">
+
+    <!-- ✏️ Each block below is one project card.
+         Change the title, description, tags, and link -->
+
+    <div class="project-card">
+      <div class="project-number">01</div>
+      <div class="project-title">Personal Portfolio Website</div>
+      <div class="project-desc">
+        A responsive personal portfolio built with HTML and CSS to showcase my
+        skills and projects. Designed with mobile-first principles and clean layout.
+      </div>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+      <!-- ✏️ Replace "#" with your project link (GitHub or live site) -->
+      <a href="#" class="project-link">View project →</a>
+    </div>
+<!----
+    <div class="project-card">
+      <div class="project-number">02</div>
+      <div class="project-title">Grade Calculator App</div>
+      <div class="project-desc">
+        A command-line Python tool that calculates GPA from user-entered marks.
+        Uses object-oriented programming concepts and input validation.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">OOP</span>
+      </div>
+      <a href="#" class="project-link">View project →</a>
+    </div>
+-->
+    <div class="project-card">
+      <div class="project-number">02</div>
+      <div class="project-title">To-Do List Web App</div>
+      <div class="project-desc">
+        A simple CRUD web application for managing tasks. Users can add, update,
+        and delete tasks. Built with PHP and MySQL for persistent storage.
+      </div>
+      <div class="project-tags">
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">HTML</span>
+      </div>
+      <a href="https://github.com/Neeeschal/Personal-Projects-/tree/main/To-do" class="project-link">View project →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">03</div>
+      <div class="project-title">A simple Phone Book App</div>
+      <div class="project-desc">
+        A simple CRUD web application for managing contacts. Users can view, add, update,
+        and delete contacts. Built with Python and basic OOP concepts for data management.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">OOP</span>
+      </div>
+      <a href="https://github.com/Neeeschal/Personal-Projects-/blob/main/contact_book.py" class="project-link">View project →</a>
+    </div>
+
+    <!-- ✏️ To add more projects, copy one project-card block and paste it here -->
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     📬 CONTACT SECTION
+     ============================================================ -->
+<section id="contact">
+  <div class="fade-in">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Contact</h2>
+  </div>
+
+  <div class="contact-wrap fade-in">
+
+    <div class="contact-info">
+      <!-- ✏️ Edit the message below -->
+      <p>
+        I'm currently looking for internship opportunities and would love to hear
+        from you. Whether you have a question, a project idea, or just want to say
+        hi — my inbox is always open!
+      </p>
+
+      <!-- ✏️ Update your contact details below -->
+      <div class="contact-links">
+
+        <a href="mailto:nischal0816@gmail.com" class="contact-link">
+          <span class="contact-link-icon">📧</span>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <!-- ✏️ Replace with your email -->
+            <div class="contact-link-val">nischal0816@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/Neeeschal" target="_blank" class="contact-link">
+          <span class="contact-link-icon">🐙</span>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <!-- ✏️ Replace with your GitHub username -->
+            <div class="contact-link-val">https://github.com/Neeeschal</div>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/nischal-koirala-401698339/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <!-- ✏️ Replace with your LinkedIn profile -->
+            <div class="contact-link-val">https://www.linkedin.com/in/nischal-koirala-401698339/</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Quick message form (visual only — needs a backend to actually send) -->
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea placeholder="Your Message"></textarea>
+      <button type="button">Send Message →</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     🔻 FOOTER
+     ============================================================ -->
+<footer>
+  <!-- ✏️ Replace "Nischal" with your actual name -->
+  <p>© 2025 Nischal Koirala · Built with HTML & CSS · Hetauda, Nepal</p>
+</footer>
+
+
+<!-- ============================================================
+     ⚙️ ANIMATIONS — you don't need to touch this!
+     ============================================================ -->
+<script>
+// Makes sections gently fade in as you scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Animates skill bars when they come into view
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-fill').forEach(bar => {
+        const w = bar.style.width; bar.style.width = '0';
+        setTimeout(() => { bar.style.width = w; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skills-grid').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>
